@@ -27,6 +27,10 @@
             font-family: 'Quicksand', sans-serif;
             background-color: var(--bg-marron);
             color: var(--texto-crema);
+            /* Fondo con el mismo tono marrón y puntos blancos */
+            background-image: radial-gradient(var(--blanco) 15%, transparent 16%);
+            background-size: 40px 40px;
+            background-attachment: fixed;
         }
 
         header {
@@ -264,6 +268,23 @@
             border-bottom: 1px solid var(--texto-crema);
             padding: 10px 0;
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-eliminar {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-eliminar:hover {
+            background-color: #fa5252;
         }
 
         .btn-pagar-wa {
@@ -296,7 +317,6 @@
 <body>
 
     <header>
-        <!-- IMPORTANTE: Renombra tu imagen en GitHub a "perfil.jpg" -->
         <img src="perfil.jpg" alt="So Cookie" class="profile-pic">
         <h1>So Cookie.</h1>
         <p>✨ Horneando felicidad en cada chispa ✨</p>
@@ -307,7 +327,6 @@
         
         <div class="menu-grid">
             <div class="cookie-card">
-                <!-- IMPORTANTE: Renombra tus imágenes de galletas en GitHub -->
                 <img id="img-chispas" src="galleta-grande.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta'">
                 
                 <h3>Galletas de Chispas de Chocolate</h3>
@@ -330,7 +349,6 @@
             </div>
 
             <div class="cookie-card">
-                <!-- IMPORTANTE: Renombra tu imagen a "box-cookies.jpg" en GitHub -->
                 <img src="box-cookies.jpg" alt="Box Cookies" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Box+Cookies'">
                 
                 <h3>Box Cookies</h3>
@@ -422,6 +440,11 @@
             alert("¡Box añadida al carrito!");
         }
 
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarritoUI();
+        }
+
         function actualizarCarritoUI() {
             document.getElementById('cart-counter').innerText = carrito.length;
             
@@ -435,8 +458,11 @@
             carrito.forEach((item, index) => {
                 html += `
                     <div class="cart-item">
-                        <strong>Producto ${index + 1}:</strong><br>
-                        ${item}
+                        <div>
+                            <strong>Producto ${index + 1}:</strong><br>
+                            ${item}
+                        </div>
+                        <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})"><i class="fas fa-trash"></i></button>
                     </div>
                 `;
             });
