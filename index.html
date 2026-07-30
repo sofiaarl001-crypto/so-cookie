@@ -4,58 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>So Cookie | Galletas Deliciosas</title>
-    <!-- Fuente linda para la página -->
+    <!-- Fuentes y librería de Iconos (FontAwesome) -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --beige: #FDF4E3;
-            --rosa: #FFA6C9;
-            --rosa-claro: #FFD1E3;
-            --marron: #6B4423;
-            --marron-oscuro: #4A2E15;
+            /* Paleta extraída de "Agregar un título (2).jpg" */
+            --bg-marron: #6B3C2A;
+            --texto-crema: #F0E3AD;
+            --marron-oscuro: #422216;
             --blanco: #FFFFFF;
+            --hover-crema: #E0D39D;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Quicksand', sans-serif;
-            background-color: var(--beige);
-            color: var(--marron-oscuro);
-            /* Patrón de chispas en el fondo usando CSS */
-            background-image: 
-                radial-gradient(var(--marron) 15%, transparent 16%),
-                radial-gradient(var(--rosa) 15%, transparent 16%);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
-            background-attachment: fixed;
-        }
-
-        /* Capa blanca semitransparente para que el texto se lea bien sobre las chispas */
-        .overlay {
-            background-color: rgba(253, 244, 227, 0.85);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: var(--bg-marron);
+            color: var(--texto-crema);
         }
 
         header {
             text-align: center;
             padding: 40px 20px;
-            background-color: var(--marron);
-            color: var(--rosa-claro);
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border-bottom: 8px solid var(--rosa);
+            background-color: var(--marron-oscuro);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border-bottom: 5px solid var(--texto-crema);
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--texto-crema);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
+            background-color: var(--texto-crema);
         }
 
         h1 {
             font-family: 'Fredoka', sans-serif;
-            font-size: 4em;
+            font-size: 3.5em;
             margin: 0;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0px var(--marron-oscuro);
+            letter-spacing: 1px;
+            color: var(--texto-crema);
         }
 
         header p {
@@ -68,13 +63,13 @@
             max-width: 1000px;
             width: 90%;
             margin: 40px auto;
+            padding-bottom: 100px; /* Espacio para el carrito flotante */
         }
 
         h2 {
             font-family: 'Fredoka', sans-serif;
             text-align: center;
             font-size: 2.5em;
-            color: var(--marron);
             margin-bottom: 30px;
         }
 
@@ -86,161 +81,410 @@
         }
 
         .cookie-card {
-            background-color: var(--blanco);
-            border: 4px solid var(--rosa-claro);
+            background-color: var(--marron-oscuro);
+            border: 3px solid var(--texto-crema);
             border-radius: 20px;
             padding: 25px;
             width: 300px;
             text-align: center;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
         }
 
-        .cookie-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--rosa);
-        }
-
-        .cookie-icon {
-            font-size: 4em;
-            margin-bottom: 10px;
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: rgba(255,255,255,0.05);
         }
 
         .cookie-card h3 {
             font-family: 'Fredoka', sans-serif;
-            color: var(--marron);
             font-size: 1.5em;
             margin: 10px 0;
+            color: var(--texto-crema);
+        }
+
+        .cookie-card p {
+            flex-grow: 1;
+            font-size: 0.95em;
+        }
+
+        .price {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6em;
+            margin: 10px 0;
+        }
+
+        .options-group {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .sizes {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 15px;
         }
 
-        .size-badge {
-            background-color: var(--rosa-claro);
-            color: var(--marron-oscuro);
+        .size-btn {
+            background-color: transparent;
+            color: var(--texto-crema);
+            border: 2px solid var(--texto-crema);
             padding: 5px 15px;
             border-radius: 20px;
             font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .size-btn.active {
+            background-color: var(--texto-crema);
+            color: var(--marron-oscuro);
+        }
+
+        .input-gramos, .select-topping {
+            width: 100%;
+            padding: 8px;
+            border-radius: 10px;
+            border: none;
+            background-color: var(--texto-crema);
+            color: var(--marron-oscuro);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn-comprar {
+            background-color: var(--texto-crema);
+            color: var(--marron-oscuro);
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-comprar:hover {
+            transform: scale(1.05);
+            background-color: var(--hover-crema);
+        }
+
+        /* Sección de Contacto (Iconos) */
+        .contact-section {
+            background-color: var(--marron-oscuro);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 50px;
+            text-align: center;
+            border: 3px dashed var(--texto-crema);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--texto-crema);
+            font-size: 2.5em;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--blanco);
+        }
+
+        /* Carrito de Compras Flotante */
+        .cart-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--texto-crema);
+            color: var(--marron-oscuro);
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            z-index: 1000;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .cart-widget:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-count {
+            background-color: var(--marron-oscuro);
+            color: var(--texto-crema);
+            border-radius: 50%;
+            padding: 5px 10px;
             font-size: 0.9em;
         }
 
-        .contact-section {
-            background-color: var(--blanco);
+        /* Modal del Carrito */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background-color: var(--bg-marron);
+            border: 3px solid var(--texto-crema);
             border-radius: 20px;
-            padding: 40px;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            text-align: center;
-            border: 4px dashed var(--marron);
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
-        .contact-list {
-            list-style: none;
-            padding: 0;
-            font-size: 1.2em;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .cart-item {
+            border-bottom: 1px solid var(--texto-crema);
+            padding: 10px 0;
+            margin-bottom: 10px;
         }
 
-        .contact-list li {
+        .btn-pagar-wa {
+            background-color: #25D366; /* Verde WhatsApp */
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
 
-        .contact-list a {
-            color: var(--marron);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .contact-list a:hover {
-            color: var(--rosa);
-        }
-
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 20px;
-            background-color: var(--marron);
-            color: var(--rosa-claro);
-            width: 100%;
-        }
-
-        /* Responsividad para pantallas pequeñas */
-        @media (max-width: 600px) {
-            h1 { font-size: 3em; }
-            .cookie-card { width: 100%; }
+        .btn-cerrar {
+            background: none;
+            border: none;
+            color: var(--texto-crema);
+            font-size: 1.2em;
+            cursor: pointer;
+            float: right;
         }
     </style>
 </head>
 <body>
 
-<div class="overlay">
     <header>
-        <h1>So Cookie</h1>
+        <!-- Tu imagen de perfil exacta -->
+        <img src="Agregar un título (2).jpg" alt="So Cookie" class="profile-pic">
+        <h1>So Cookie.</h1>
         <p>✨ Horneando felicidad en cada chispa ✨</p>
     </header>
 
     <div class="container">
-        <h2>Nuestro Menú Disponible</h2>
+        <h2>Nuestro Menú</h2>
         
         <div class="menu-grid">
-            <!-- Galleta 1 -->
+            <!-- Producto 1: Galleta de Chispas -->
             <div class="cookie-card">
-                <div class="cookie-icon">🍪🤎</div>
-                <h3>Galleta de Chocolate con M&M's</h3>
-                <p>Una masa rica y profunda de chocolate oscuro, llena de coloridos y crujientes M&M's.</p>
-                <div class="sizes">
-                    <span class="size-badge">Grande</span>
-                    <span class="size-badge">Mini</span>
+                <!-- Imagen que cambiará con los botones -->
+                <img id="img-chispas" src="galleta-grande.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta+Grande'">
+                
+                <h3>Galletas de Chispas de Chocolate</h3>
+                <p>Clásica e irresistible galleta repleta de chispas de chocolate derretido.</p>
+                
+                <div class="options-group">
+                    <label>Tamaño:</label>
+                    <div class="sizes">
+                        <button class="size-btn active" id="btn-grande" onclick="cambiarTamano('Grande', 'galleta-grande.jpg')">Grande</button>
+                        <button class="size-btn" id="btn-mini" onclick="cambiarTamano('Mini', 'galleta-mini.jpg')">Mini</button>
+                    </div>
+                    
+                    <label style="margin-top: 10px;">¿Cuántos gramos deseas?</label>
+                    <input type="number" id="gramos-chispas" class="input-gramos" value="100" min="50" step="50">
                 </div>
+
+                <button class="btn-comprar" onclick="agregarChispas()">
+                    <i class="fas fa-shopping-cart"></i> Comprar
+                </button>
             </div>
 
-            <!-- Galleta 2 -->
+            <!-- Producto 2: Box Cookies -->
             <div class="cookie-card">
-                <div class="cookie-icon">🍪✨</div>
-                <h3>Galleta de Vainilla con Chispas</h3>
-                <p>La clásica e irresistible galleta de vainilla, repleta de chispas de chocolate derretido.</p>
-                <div class="sizes">
-                    <span class="size-badge">Grande</span>
-                    <span class="size-badge">Mini</span>
+                <!-- Imagen placeholder para la Box (puedes reemplazarla) -->
+                <img src="box-cookies.jpg" alt="Box Cookies" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Box+Cookies'">
+                
+                <h3>Box Cookies</h3>
+                <div class="price">$5.00</div>
+                <p>Nuestra cajita especial. ¡Perfecta para compartir un momento dulce!</p>
+                
+                <div class="options-group">
+                    <label>Elige tu Topping:</label>
+                    <select id="topping-box" class="select-topping">
+                        <option value="Ovomaltina">Ovomaltina</option>
+                        <option value="Nutella">Nutella</option>
+                        <option value="Ambos (Ovomaltina y Nutella)">Ambos (Ovomaltina y Nutella)</option>
+                    </select>
                 </div>
+
+                <button class="btn-comprar" onclick="agregarBox()">
+                    <i class="fas fa-shopping-cart"></i> Comprar
+                </button>
             </div>
         </div>
 
         <div class="contact-section">
-            <h2>¡Haz tu pedido!</h2>
-            <p>Contáctanos para probar nuestras deliciosas galletas.</p>
-            <ul class="contact-list">
-                <li>
-                    📱 <strong>Teléfono:</strong> 
-                    <a href="tel:0127776502">0127776502</a>
-                </li>
-                <li>
-                    ✉️ <strong>Correo:</strong> 
-                    <a href="mailto:sofiaarl001@gmail.com">sofiaarl001@gmail.com</a>
-                </li>
-                <li>
-                    📷 <strong>Instagram:</strong> 
-                    <a href="https://instagram.com/so.cookie_val" target="_blank">@so.cookie_val</a>
-                </li>
-            </ul>
+            <h2>¡Síguenos y contáctanos!</h2>
+            <div class="social-icons">
+                <!-- Iconos Clickables que redirigen a tus redes/contacto -->
+                <a href="https://instagram.com/so.cookie_val" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/580127776502" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:sofiaarl001@gmail.com" title="Correo Electrónico">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 So Cookie. Todos los derechos reservados.</p>
-    </footer>
-</div>
+    <!-- Widget Flotante del Carrito -->
+    <div class="cart-widget" onclick="abrirCarrito()">
+        <i class="fas fa-shopping-basket fa-lg"></i>
+        <span>Ver Carrito</span>
+        <span class="cart-count" id="cart-counter">0</span>
+    </div>
 
+    <!-- Modal del Carrito -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <button class="btn-cerrar" onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
+            <h2>Tu Pedido</h2>
+            <div id="cart-items-container">
+                <p>El carrito está vacío.</p>
+            </div>
+            <button class="btn-pagar-wa" onclick="enviarPedidoWhatsApp()">
+                <i class="fab fa-whatsapp fa-lg"></i> Pagar por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- LÓGICA DE INTERACCIÓN ---
+
+        // Variable para guardar el tamaño seleccionado de las galletas de chispas
+        let tamanoSeleccionado = 'Grande';
+        let carrito = [];
+
+        // Cambiar imagen y tamaño seleccionado
+        function cambiarTamano(tamano, urlImagen) {
+            tamanoSeleccionado = tamano;
+            
+            // Actualizar botones visualmente
+            document.getElementById('btn-grande').classList.remove('active');
+            document.getElementById('btn-mini').classList.remove('active');
+            
+            if (tamano === 'Grande') {
+                document.getElementById('btn-grande').classList.add('active');
+            } else {
+                document.getElementById('btn-mini').classList.add('active');
+            }
+
+            // Cambiar la imagen (Reemplaza los nombres de archivo en el HTML por los tuyos reales)
+            document.getElementById('img-chispas').src = urlImagen;
+        }
+
+        // Agregar Galleta de Chispas al carrito
+        function agregarChispas() {
+            let gramos = document.getElementById('gramos-chispas').value;
+            let producto = `Galletas de Chispas (${tamanoSeleccionado}) - ${gramos}g`;
+            carrito.push(producto);
+            actualizarCarritoUI();
+            alert("¡Agregado al carrito!");
+        }
+
+        // Agregar Box Cookies al carrito
+        function agregarBox() {
+            let topping = document.getElementById('topping-box').value;
+            let producto = `Box Cookies ($5) - Topping: ${topping}`;
+            carrito.push(producto);
+            actualizarCarritoUI();
+            alert("¡Box añadida al carrito!");
+        }
+
+        // Actualizar la interfaz del carrito
+        function actualizarCarritoUI() {
+            document.getElementById('cart-counter').innerText = carrito.length;
+            
+            let container = document.getElementById('cart-items-container');
+            if (carrito.length === 0) {
+                container.innerHTML = '<p>El carrito está vacío.</p>';
+                return;
+            }
+
+            let html = '';
+            carrito.forEach((item, index) => {
+                html += `
+                    <div class="cart-item">
+                        <strong>Producto ${index + 1}:</strong><br>
+                        ${item}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Abrir y cerrar el modal
+        function abrirCarrito() {
+            document.getElementById('cart-modal').style.display = 'flex';
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        // Enviar pedido a WhatsApp
+        function enviarPedidoWhatsApp() {
+            if (carrito.length === 0) {
+                alert("Agrega productos al carrito primero.");
+                return;
+            }
+
+            let mensaje = "¡Hola So Cookie! 🍪 Quisiera realizar el siguiente pedido:%0A%0A";
+            carrito.forEach((item, index) => {
+                mensaje += `*- ${item}*%0A`;
+            });
+            mensaje += "%0A¿Cómo podemos concretar el pago?";
+
+            // Número de WhatsApp (Formato internacional, usando el número proveído)
+            let numero = "580127776502";
+            let url = `https://wa.me/${numero}?text=${mensaje}`;
+            
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
