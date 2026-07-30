@@ -27,7 +27,7 @@
             font-family: 'Quicksand', sans-serif;
             background-color: var(--bg-marron);
             color: var(--texto-crema);
-            /* Fondo con el mismo tono marrón y puntos blancos */
+            /* Fondo con tono marrón y puntos blancos */
             background-image: radial-gradient(var(--blanco) 15%, transparent 16%);
             background-size: 40px 40px;
             background-attachment: fixed;
@@ -102,10 +102,11 @@
         .product-image {
             width: 100%;
             height: 200px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
             background-color: rgba(255,255,255,0.05);
+            transition: opacity 0.3s ease;
         }
 
         .cookie-card h3 {
@@ -317,6 +318,7 @@
 <body>
 
     <header>
+        <!-- Asegúrate de subir esta imagen como "perfil.jpg" a tu repositorio -->
         <img src="perfil.jpg" alt="So Cookie" class="profile-pic">
         <h1>So Cookie.</h1>
         <p>✨ Horneando felicidad en cada chispa ✨</p>
@@ -327,7 +329,8 @@
         
         <div class="menu-grid">
             <div class="cookie-card">
-                <img id="img-chispas" src="galleta-grande.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta'">
+                <!-- Imagen inicial por defecto (Grande): galletas grandes.jpg -->
+                <img id="img-chispas" src="galletas grandes.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta'">
                 
                 <h3>Galletas de Chispas de Chocolate</h3>
                 <p>Clásica e irresistible galleta repleta de chispas de chocolate derretido.</p>
@@ -335,8 +338,8 @@
                 <div class="options-group">
                     <label>Tamaño:</label>
                     <div class="sizes">
-                        <button class="size-btn active" id="btn-grande" onclick="cambiarTamano('Grande', 'galleta-grande.jpg')">Grande</button>
-                        <button class="size-btn" id="btn-mini" onclick="cambiarTamano('Mini', 'galleta-mini.jpg')">Mini</button>
+                        <button class="size-btn active" id="btn-grande" onclick="cambiarTamano('Grande', 'galletas grandes.jpg')">Grande</button>
+                        <button class="size-btn" id="btn-mini" onclick="cambiarTamano('Mini', 'galletas mini.jpg')">Mini</button>
                     </div>
                     
                     <label style="margin-top: 10px;">¿Cuántos gramos deseas?</label>
@@ -349,6 +352,7 @@
             </div>
 
             <div class="cookie-card">
+                <!-- Asegúrate de subir esta imagen como "box-cookies.jpg" a tu repositorio -->
                 <img src="box-cookies.jpg" alt="Box Cookies" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Box+Cookies'">
                 
                 <h3>Box Cookies</h3>
