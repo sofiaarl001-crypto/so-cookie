@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="So Cookie - Galletas de chispas de chocolate y Box Cookies deliciosas.">
     <title>So Cookie | Galletas Deliciosas</title>
-    <!-- Fuentes y librería de Iconos (FontAwesome) -->
+    
+    <!-- Fuentes y librería de Iconos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            /* Paleta extraída de "Agregar un título (2).jpg" */
             --bg-marron: #6B3C2A;
             --texto-crema: #F0E3AD;
             --marron-oscuro: #422216;
@@ -63,7 +66,7 @@
             max-width: 1000px;
             width: 90%;
             margin: 40px auto;
-            padding-bottom: 100px; /* Espacio para el carrito flotante */
+            padding-bottom: 100px;
         }
 
         h2 {
@@ -179,7 +182,6 @@
             background-color: var(--hover-crema);
         }
 
-        /* Sección de Contacto (Iconos) */
         .contact-section {
             background-color: var(--marron-oscuro);
             border-radius: 20px;
@@ -207,7 +209,6 @@
             color: var(--blanco);
         }
 
-        /* Carrito de Compras Flotante */
         .cart-widget {
             position: fixed;
             bottom: 20px;
@@ -238,7 +239,6 @@
             font-size: 0.9em;
         }
 
-        /* Modal del Carrito */
         .cart-modal {
             display: none;
             position: fixed;
@@ -267,7 +267,7 @@
         }
 
         .btn-pagar-wa {
-            background-color: #25D366; /* Verde WhatsApp */
+            background-color: #25D366;
             color: white;
             border: none;
             padding: 15px;
@@ -296,8 +296,8 @@
 <body>
 
     <header>
-        <!-- Tu imagen de perfil exacta -->
-        <img src="Agregar un título (2).jpg" alt="So Cookie" class="profile-pic">
+        <!-- IMPORTANTE: Renombra tu imagen en GitHub a "perfil.jpg" -->
+        <img src="perfil.jpg" alt="So Cookie" class="profile-pic">
         <h1>So Cookie.</h1>
         <p>✨ Horneando felicidad en cada chispa ✨</p>
     </header>
@@ -306,10 +306,9 @@
         <h2>Nuestro Menú</h2>
         
         <div class="menu-grid">
-            <!-- Producto 1: Galleta de Chispas -->
             <div class="cookie-card">
-                <!-- Imagen que cambiará con los botones -->
-                <img id="img-chispas" src="galleta-grande.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta+Grande'">
+                <!-- IMPORTANTE: Renombra tus imágenes de galletas en GitHub -->
+                <img id="img-chispas" src="galleta-grande.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta'">
                 
                 <h3>Galletas de Chispas de Chocolate</h3>
                 <p>Clásica e irresistible galleta repleta de chispas de chocolate derretido.</p>
@@ -330,9 +329,8 @@
                 </button>
             </div>
 
-            <!-- Producto 2: Box Cookies -->
             <div class="cookie-card">
-                <!-- Imagen placeholder para la Box (puedes reemplazarla) -->
+                <!-- IMPORTANTE: Renombra tu imagen a "box-cookies.jpg" en GitHub -->
                 <img src="box-cookies.jpg" alt="Box Cookies" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Box+Cookies'">
                 
                 <h3>Box Cookies</h3>
@@ -344,7 +342,7 @@
                     <select id="topping-box" class="select-topping">
                         <option value="Ovomaltina">Ovomaltina</option>
                         <option value="Nutella">Nutella</option>
-                        <option value="Ambos (Ovomaltina y Nutella)">Ambos (Ovomaltina y Nutella)</option>
+                        <option value="Ambos">Ambos (Ovomaltina y Nutella)</option>
                     </select>
                 </div>
 
@@ -357,7 +355,6 @@
         <div class="contact-section">
             <h2>¡Síguenos y contáctanos!</h2>
             <div class="social-icons">
-                <!-- Iconos Clickables que redirigen a tus redes/contacto -->
                 <a href="https://instagram.com/so.cookie_val" target="_blank" title="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
@@ -371,14 +368,12 @@
         </div>
     </div>
 
-    <!-- Widget Flotante del Carrito -->
     <div class="cart-widget" onclick="abrirCarrito()">
         <i class="fas fa-shopping-basket fa-lg"></i>
         <span>Ver Carrito</span>
         <span class="cart-count" id="cart-counter">0</span>
     </div>
 
-    <!-- Modal del Carrito -->
     <div class="cart-modal" id="cart-modal">
         <div class="cart-content">
             <button class="btn-cerrar" onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
@@ -393,17 +388,12 @@
     </div>
 
     <script>
-        // --- LÓGICA DE INTERACCIÓN ---
-
-        // Variable para guardar el tamaño seleccionado de las galletas de chispas
         let tamanoSeleccionado = 'Grande';
         let carrito = [];
 
-        // Cambiar imagen y tamaño seleccionado
         function cambiarTamano(tamano, urlImagen) {
             tamanoSeleccionado = tamano;
             
-            // Actualizar botones visualmente
             document.getElementById('btn-grande').classList.remove('active');
             document.getElementById('btn-mini').classList.remove('active');
             
@@ -413,11 +403,9 @@
                 document.getElementById('btn-mini').classList.add('active');
             }
 
-            // Cambiar la imagen (Reemplaza los nombres de archivo en el HTML por los tuyos reales)
             document.getElementById('img-chispas').src = urlImagen;
         }
 
-        // Agregar Galleta de Chispas al carrito
         function agregarChispas() {
             let gramos = document.getElementById('gramos-chispas').value;
             let producto = `Galletas de Chispas (${tamanoSeleccionado}) - ${gramos}g`;
@@ -426,7 +414,6 @@
             alert("¡Agregado al carrito!");
         }
 
-        // Agregar Box Cookies al carrito
         function agregarBox() {
             let topping = document.getElementById('topping-box').value;
             let producto = `Box Cookies ($5) - Topping: ${topping}`;
@@ -435,7 +422,6 @@
             alert("¡Box añadida al carrito!");
         }
 
-        // Actualizar la interfaz del carrito
         function actualizarCarritoUI() {
             document.getElementById('cart-counter').innerText = carrito.length;
             
@@ -457,7 +443,6 @@
             container.innerHTML = html;
         }
 
-        // Abrir y cerrar el modal
         function abrirCarrito() {
             document.getElementById('cart-modal').style.display = 'flex';
         }
@@ -466,7 +451,6 @@
             document.getElementById('cart-modal').style.display = 'none';
         }
 
-        // Enviar pedido a WhatsApp
         function enviarPedidoWhatsApp() {
             if (carrito.length === 0) {
                 alert("Agrega productos al carrito primero.");
@@ -479,7 +463,6 @@
             });
             mensaje += "%0A¿Cómo podemos concretar el pago?";
 
-            // Número de WhatsApp (Formato internacional, usando el número proveído)
             let numero = "580127776502";
             let url = `https://wa.me/${numero}?text=${mensaje}`;
             
