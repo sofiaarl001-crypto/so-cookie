@@ -318,7 +318,7 @@
 <body>
 
     <header>
-        <!-- Asegúrate de subir esta imagen como "perfil.jpg" a tu repositorio -->
+        <!-- Imagen de perfil -->
         <img src="perfil.jpg" alt="So Cookie" class="profile-pic">
         <h1>So Cookie.</h1>
         <p>✨ Horneando felicidad en cada chispa ✨</p>
@@ -328,8 +328,8 @@
         <h2>Nuestro Menú</h2>
         
         <div class="menu-grid">
+            <!-- Galleta de Chispas -->
             <div class="cookie-card">
-                <!-- Imagen inicial por defecto (Grande): galletas grandes.jpg -->
                 <img id="img-chispas" src="galletas grandes.jpg" alt="Galleta" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Galleta'">
                 
                 <h3>Galletas de Chispas de Chocolate</h3>
@@ -351,9 +351,9 @@
                 </button>
             </div>
 
+            <!-- Box Cookies (Con cambio de imagen según topping) -->
             <div class="cookie-card">
-                <!-- Asegúrate de subir esta imagen como "box-cookies.jpg" a tu repositorio -->
-                <img src="box-cookies.jpg" alt="Box Cookies" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Box+Cookies'">
+                <img id="img-box" src="ovomaltina.jpg" alt="Box Cookies" class="product-image" onerror="this.src='https://via.placeholder.com/300x200/422216/F0E3AD?text=Foto+Box+Cookies'">
                 
                 <h3>Box Cookies</h3>
                 <div class="price">$5.00</div>
@@ -361,7 +361,7 @@
                 
                 <div class="options-group">
                     <label>Elige tu Topping:</label>
-                    <select id="topping-box" class="select-topping">
+                    <select id="topping-box" class="select-topping" onchange="cambiarImagenBox(this.value)">
                         <option value="Ovomaltina">Ovomaltina</option>
                         <option value="Nutella">Nutella</option>
                         <option value="Ambos">Ambos (Ovomaltina y Nutella)</option>
@@ -426,6 +426,18 @@
             }
 
             document.getElementById('img-chispas').src = urlImagen;
+        }
+
+        // Cambiar imagen de la Box Cookies según el topping seleccionado
+        function cambiarImagenBox(topping) {
+            let imgBox = document.getElementById('img-box');
+            if (topping === 'Nutella') {
+                imgBox.src = 'nutella.jpg';
+            } else if (topping === 'Ovomaltina') {
+                imgBox.src = 'ovomaltina.jpg';
+            } else {
+                imgBox.src = 'nutella.jpg'; // Imagen por defecto si elige ambos
+            }
         }
 
         function agregarChispas() {
